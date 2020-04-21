@@ -1,37 +1,37 @@
 import React from 'react';
 
-class NavItem extends React.Component{
-  render() {
-    const label = this.props.label;
-    const view = this.props.view;
-    const className = this.props.isActive ? 'nav-link active' : 'nav-link';
-    return (
-      <li className="nav-item">
-        <a className={className} onClick={this.props.onClick} href="#">{label}</a>
-      </li>
-    );
-  }
-}
-
 export default class Nav extends React.Component {
   render() {
     const setView = this.props.setView;
-    const viewMap = this.props.viewMap;
     const currentView = this.props.currentView;
-
+    const regularClass = 'nav-link';
+    const activeClass = 'nav-link active';
     return (
       <ul className="nav nav-pills justify-content-end">
-        {Object.keys(viewMap).map(view => {
-          return (
-            <NavItem
-              key={view}
-              label={viewMap[view].label}
-              view={view}
-              isActive={view === currentView}
-              onClick={() => setView(view)}
-            />
-          )
-        })}
+        <li className="nav-item">
+          <a
+            className={currentView === 'view-cards' ? activeClass : regularClass}
+            onClick={() => setView('view-cards')}
+            href="#">
+            View Cards
+          </a>
+        </li>
+        <li className="nav-item">
+          <a
+            className={currentView === 'review-cards' ? activeClass : regularClass}
+            onClick={() => setView('review-cards')}
+            href="#">
+            Review
+          </a>
+        </li>
+        <li className="nav-item">
+          <a
+            className={currentView === 'create-card' ? activeClass : regularClass}
+            onClick={() => setView('create-card')}
+            href="#">
+            Create Card
+          </a>
+        </li>
       </ul>
     )
   }
