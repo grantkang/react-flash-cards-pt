@@ -15,15 +15,19 @@ export default class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.loadCards();
+  }
+
   getView() {
     const view = this.state.view;
     switch (view) {
       case 'view-cards':
-        return <ViewCards />;
+        return <ViewCards cards={this.state.cards}/>;
       case 'review-cards':
         return <ReviewCards />;
       case 'create-card':
-        return <CreateCard onSubmit={this.addCard} />;
+        return <CreateCard onSubmit={this.addCard} onReset={() => this.setView('view-cards')}/>;
       default:
         return null;
     }
@@ -35,6 +39,10 @@ export default class App extends React.Component {
 
   saveCards() {
     localStorage.setItem('flash-cards', JSON.stringify(this.state.cards));
+  }
+
+  loadCards() {
+    this.setState({cards: JSON.parse(localStorage.getItem('flash-cards'))});
   }
 
   addCard(card) {
