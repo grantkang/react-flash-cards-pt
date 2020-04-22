@@ -22,6 +22,7 @@ export default class CreateCard extends React.Component {
 
   handleReset(e) {
     e.preventDefault();
+    this.props.onReset();
     this.resetForm();
   }
 
@@ -35,7 +36,6 @@ export default class CreateCard extends React.Component {
   }
 
   resetForm() {
-    console.log(this.state.question);
     this.setState({
       question: '',
       answer: ''
@@ -45,7 +45,7 @@ export default class CreateCard extends React.Component {
   render() {
     return (
       <div className="d-flex flex-column align-items-center">
-        <h1 className="text-center">CreateCard Component</h1>
+        <h1 className="text-center">Create New Card</h1>
         <form className="col-8" onSubmit={this.handleSubmit} onReset={this.handleReset}>
           <div className="form-group">
             <label htmlFor="questionInput">Question:</label>
